@@ -8,7 +8,10 @@ package com.nankai.yimixican.dao.impl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.nankai.yimixican.dao.IHabitDao;
@@ -22,7 +25,6 @@ public class HabitDaoImpl implements IHabitDao {
 	private ConnectionManager connectionManager;
 	private Connection conn;
 	private DBUtils dbUtils;
-	
 	public HabitDaoImpl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -65,8 +67,7 @@ public class HabitDaoImpl implements IHabitDao {
 		
 		int classID=habit.getClassID();
 		String name=habit.getName();
-		
-			String strSQL = "insert into habits values(null,?,?)";
+			String strSQL = "insert into habits values(null,?,?,1)";
 			Object[] params = new Object[]{classID,name};		
 			int affectedRows = this.dbUtils.execOthers(conn, strSQL, params);
 			if(affectedRows > 0){
@@ -80,12 +81,21 @@ public class HabitDaoImpl implements IHabitDao {
 	
 /*测试
 public static void main(String[] args) {
-	HabitDaoImpl daoImpl=new HabitDaoImpl();
-	ArrayList<Habit> list=(ArrayList<Habit>) daoImpl.showByClassID(2);
-	for (Habit habit : list) {
-		System.out.println(habit.getName());
-	}
-}
-*/
+//	HabitDaoImpl daoImpl=new HabitDaoImpl();
+//	ArrayList<Habit> list=(ArrayList<Habit>) daoImpl.showByClassID(2);
+//	for (Habit habit : list) {
+//		System.out.println(habit.getName());
+//	}
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd 00:00:00");
+//	Date d = new Date();
+//	String date = sdf.format(d);
+//	System.out.println(date);
+	Calendar c = Calendar.getInstance();
+	long t = c.getTimeInMillis();
+	long l = t - 24 * 3600 * 1000;
+	Date d = new Date(l);
+	String s = sdf.format(d);
+	System.out.println(s);
+}*/
 }
 
