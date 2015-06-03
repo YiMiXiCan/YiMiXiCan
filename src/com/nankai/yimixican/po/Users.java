@@ -14,19 +14,21 @@ public class Users implements Serializable {
 	private int gender;
 	private int age;
 	private int rank;
-	private String remark;
+	private String remind;
 	private String password;
 	private float height;
 	private float weight;
-	private String head_photo;
-	private String segtime;
+	private String remindtime;
+	private String repassword;
+	private String declaration;
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Users(int uid, String username, String regtime, int gender, int age,
-			int rank, String remark, String password, float height,
-			float weight, String head_photo, String segtime) {
+			int rank, String remind, String password, float height,
+			float weight, String remindtime, String repassword,
+			String declaration) {
 		super();
 		this.uid = uid;
 		this.username = username;
@@ -34,13 +36,15 @@ public class Users implements Serializable {
 		this.gender = gender;
 		this.age = age;
 		this.rank = rank;
-		this.remark = remark;
+		this.remind = remind;
 		this.password = password;
 		this.height = height;
 		this.weight = weight;
-		this.head_photo = head_photo;
-		this.segtime = segtime;
+		this.remindtime = remindtime;
+		this.repassword = repassword;
+		this.declaration = declaration;
 	}
+	
 	public int getUid() {
 		return uid;
 	}
@@ -77,11 +81,11 @@ public class Users implements Serializable {
 	public void setRank(int rank) {
 		this.rank = rank;
 	}
-	public String getRemark() {
-		return remark;
+	public String getRemind() {
+		return remind;
 	}
-	public void setRemark(String remark) {
-		this.remark = remark;
+	public void setRemind(String remind) {
+		this.remind = remind;
 	}
 	public String getPassword() {
 		return password;
@@ -101,17 +105,23 @@ public class Users implements Serializable {
 	public void setWeight(float weight) {
 		this.weight = weight;
 	}
-	public String getHead_photo() {
-		return head_photo;
+	public String getRemindtime() {
+		return remindtime;
 	}
-	public void setHead_photo(String head_photo) {
-		this.head_photo = head_photo;
+	public void setRemindtime(String remindtime) {
+		this.remindtime = remindtime;
 	}
-	public String getSegtime() {
-		return segtime;
+	public String getRepassword() {
+		return repassword;
 	}
-	public void setSegtime(String segtime) {
-		this.segtime = segtime;
+	public void setRepassword(String repassword) {
+		this.repassword = repassword;
+	}
+	public String getDeclaration() {
+		return declaration;
+	}
+	public void setDeclaration(String declaration) {
+		this.declaration = declaration;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -120,11 +130,11 @@ public class Users implements Serializable {
 	public String toString() {
 		return "Users [uid=" + uid + ", username=" + username + ", regtime="
 				+ regtime + ", gender=" + gender + ", age=" + age + ", rank="
-				+ rank + ", remark=" + remark + ", password=" + password
-				+ ", height=" + height + ", weight=" + weight + ", head_photo="
-				+ head_photo + ", segtime=" + segtime + "]";
+				+ rank + ", remind=" + remind + ", password=" + password
+				+ ", height=" + height + ", weight=" + weight + ", remindtime="
+				+ remindtime + ", repassword=" + repassword + ", declaration="
+				+ declaration + "]";
 	}
 	
-	
-	
+
 }

@@ -32,17 +32,18 @@ Connection conn=connectionManager.openConnection();
 	    int uid=user.getUid();
 	    String username=user.getUsername();
 	    String password=user.getPassword();
+	    String repassword=user.getRepassword();
 	    int gender=user.getGender();
 	    int age=user.getAge();
-	    String remark=user.getRemark();
+	    String remind=user.getRemind();
 	    float height=user.getHeight();
 	    float weight=user.getWeight();
-	    String head_photo=user.getHead_photo();
-	    String regtime=user.getRegtime();
+	    String remindtime=user.getRemindtime();
+	    String declaration=user.getDeclaration();
 	    
-	    String strSQL="insert into Users values(null,?,?,?,?,?,?,?,?,?)";
+	    String strSQL="insert into Users values(null,?,?,?,?,?,?,?,?,?,?)";
 	    
-	    Object[] params=new Object[]{uid,username,password,gender,age,remark,height,weight,head_photo,regtime};
+	    Object[] params=new Object[]{uid,username,password,repassword,gender,age,remind,height,weight,declaration,remindtime};
 	    
 	    int affectedRows=this.dbUtils.execOthers(conn, strSQL, params);
 	    
@@ -80,11 +81,12 @@ Connection conn=connectionManager.openConnection();
 					user.setGender(resultSet.getInt(4));
 					user.setAge(resultSet.getInt(5));
 					user.setRank(resultSet.getInt(6));
-					user.setRemark(resultSet.getString(7));
+					user.setRemind(resultSet.getString(7));
 					user.setHeight(resultSet.getFloat(8));
 					user.setWeight(resultSet.getFloat(9));
-					user.setHead_photo(resultSet.getString(10));
-					user.setRegtime(resultSet.getString(11));
+					user.setDeclaration(resultSet.getString(10));
+					user.setRemindtime(resultSet.getString(11));
+					user.setRepassword(resultSet.getString(12));
 					
 					lstUsers.add(user);
 					
@@ -138,11 +140,12 @@ Connection conn = this.connectionManager.openConnection();
 				user.setGender(resultSet.getInt(4));
 				user.setAge(resultSet.getInt(5));
 				user.setRank(resultSet.getInt(6));
-				user.setRemark(resultSet.getString(7));
+				user.setRemind(resultSet.getString(7));
 				user.setHeight(resultSet.getFloat(8));
 				user.setWeight(resultSet.getFloat(9));
-				user.setHead_photo(resultSet.getString(10));
-				user.setRegtime(resultSet.getString(11));
+				user.setDeclaration(resultSet.getString(10));
+				user.setRemindtime(resultSet.getString(11));
+				user.setRepassword(resultSet.getString(12));
 				return user;
 			}
 		} catch (SQLException e) {
@@ -174,11 +177,12 @@ Connection conn = this.connectionManager.openConnection();
 				user.setGender(resultSet.getInt(4));
 				user.setAge(resultSet.getInt(5));
 				user.setRank(resultSet.getInt(6));
-				user.setRemark(resultSet.getString(7));
+				user.setRemind(resultSet.getString(7));
 				user.setHeight(resultSet.getFloat(8));
 				user.setWeight(resultSet.getFloat(9));
-				user.setHead_photo(resultSet.getString(10));
-				user.setRegtime(resultSet.getString(11));
+				user.setDeclaration(resultSet.getString(10));
+				user.setRemindtime(resultSet.getString(11));
+				user.setRepassword(resultSet.getString(12));
 				return user;
 			} else {
 				return null;

@@ -104,7 +104,7 @@ public class RegisterServlet extends HttpServlet {
 							user.setUsername(value);
 							System.out.println("注册账号：> " + value);
 						}
-						if ("user_pwd".equalsIgnoreCase(name)) {
+						if ("password".equalsIgnoreCase(name)) {
 							String value = fileItem.getString();
 							value = new String(value.getBytes("iso8859-1"),
 									"UTF-8");
@@ -116,7 +116,7 @@ public class RegisterServlet extends HttpServlet {
 							value = new String(value.getBytes("iso8859-1"),
 									"UTF-8");
 							password1=value;
-							System.out.println("测试-用户昵称：> " + value);
+							System.out.println("测试-密码验证：> " + value);
 						}
 					}else {
 					}
