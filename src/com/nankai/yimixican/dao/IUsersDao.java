@@ -11,7 +11,7 @@ public interface IUsersDao {
 	public abstract int deleteById(final int uid);  //删除用户
 	public abstract Users selectByName(final String username); //通过姓名查找
 	public abstract int update(final Users user);// 更新
-	public abstract Users selectByObject(final String username,final String password);//登陆验证
-	public abstract Users selectById(final int uid);//通过id查询
+	public abstract Users selectByObject(final String uid,final String password);//登陆验证
+	public abstract Users selectById(final String uid);//通过id查询
 
 }

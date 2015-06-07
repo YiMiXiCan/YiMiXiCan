@@ -29,7 +29,7 @@ Connection conn=connectionManager.openConnection();
 	    TransactionManager.conn=conn;
 	    TransactionManager.beginTransaction();
 	    
-	    int uid=user.getUid();
+	    String uid=user.getUid();
 	    String username=user.getUsername();
 	    String password=user.getPassword();
 	    String repassword=user.getRepassword();
@@ -75,7 +75,7 @@ Connection conn=connectionManager.openConnection();
 				while(resultSet.next())
 				{
 					Users user=new Users();
-					user.setUid(resultSet.getInt(1));
+					user.setUid(resultSet.getString(1));
 					user.setUsername(resultSet.getString(2));
 					user.setPassword(resultSet.getString(3));
 					user.setGender(resultSet.getInt(4));
@@ -123,18 +123,18 @@ Connection conn=connectionManager.openConnection();
 	}
 
 	@Override
-	public Users selectByObject(String username, String password) {
+	public Users selectByObject(String uid, String password) {
 		// TODO Auto-generated method stub
 Connection conn = this.connectionManager.openConnection();
 		
-		String strSQL = "select * from users where username=? and password=?";
-		Object[] params = new Object[]{username, password};
+		String strSQL = "select * from users where uid=? and password=?";
+		Object[] params = new Object[]{uid, password};
 		
 		ResultSet resultSet = this.dbUtils.execQuery(conn, strSQL, params);
 		try {
 			if(resultSet.next()){
 				Users user=new Users();
-				user.setUid(resultSet.getInt(1));
+				user.setUid(resultSet.getString(1));
 				user.setUsername(resultSet.getString(2));
 				user.setPassword(resultSet.getString(3));
 				user.setGender(resultSet.getInt(4));
@@ -159,7 +159,7 @@ Connection conn = this.connectionManager.openConnection();
 	}
 
 	@Override
-	public Users selectById(int uid) {
+	public Users selectById(String uid) {
 		// TODO Auto-generated method stub
 Connection conn = this.connectionManager.openConnection();
 		
@@ -171,7 +171,7 @@ Connection conn = this.connectionManager.openConnection();
 		try {
 			if (resultSet.next()) {
 				Users user=new Users();
-				user.setUid(resultSet.getInt(1));
+				user.setUid(resultSet.getString(1));
 				user.setUsername(resultSet.getString(2));
 				user.setPassword(resultSet.getString(3));
 				user.setGender(resultSet.getInt(4));

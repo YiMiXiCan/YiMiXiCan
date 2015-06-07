@@ -21,7 +21,7 @@ private IUsersDao iUsersDao;
 	public boolean add(Users user) {
 		// TODO Auto-generated method stub
 		if(this.iUsersDao.selectById(user.getUid())==null){
-			if(user.getUsername()!=null&&user.getPassword()!=null)
+			if(user.getUsername()!=null&&user.getPassword()!=null&&user.getRepassword()!=null)
 			{
 			
 			   return this.iUsersDao.insert(user)>0?true:false;
@@ -44,7 +44,7 @@ private IUsersDao iUsersDao;
 	}
 
 	@Override
-	public Users findById(int uid) {
+	public Users findById(String uid) {
 		// TODO Auto-generated method stub
 		return null;
 	}
