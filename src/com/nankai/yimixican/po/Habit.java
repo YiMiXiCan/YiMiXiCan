@@ -10,15 +10,17 @@ public class Habit {
 	private int hibitID;//习惯ID
 	private int classID;//类ID，1:饮食  2:生活  3:运动
 	private String name;//习惯名称
+	private String imgurl;//图片路径
 	public Habit() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Habit(int hibitID, int classID, String name) {
+	public Habit(int hibitID, int classID, String name, String imgurl) {
 		super();
 		this.hibitID = hibitID;
 		this.classID = classID;
 		this.name = name;
+		this.imgurl = imgurl;
 	}
 	/**
 	 * @return the hibitID
@@ -56,15 +58,26 @@ public class Habit {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return the imgurl
+	 */
+	public String getImgurl() {
+		return imgurl;
+	}
+	/**
+	 * @param imgurl the imgurl to set
+	 */
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Habit [hibitID=" + hibitID + ", classID=" + classID + ", name="
-				+ name + "]";
+				+ name + ", imgurl=" + imgurl + "]";
 	}
-	
 	
 
 }
