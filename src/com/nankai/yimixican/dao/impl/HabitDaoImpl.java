@@ -8,10 +8,7 @@ package com.nankai.yimixican.dao.impl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import com.nankai.yimixican.dao.IHabitDao;
@@ -36,7 +33,7 @@ public class HabitDaoImpl implements IHabitDao {
 	public List<Habit> showByClassID(int classID) {
 		// TODO Auto-generated method stub
 		this.conn=this.connectionManager.openConnection();
-		String strSQL="select* from habits where class=?";
+		String strSQL="select * from habits where class=?";
 		Object[] params=new Object[]{classID};
 		ResultSet resultSet=this.dbUtils.execQuery(conn, strSQL, params);
 		List<Habit>list=new ArrayList<Habit>();
