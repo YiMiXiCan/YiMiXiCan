@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.nankai.yimixican.po.Users;
 import com.nankai.yimixican.db.TransactionManager;
 import com.nankai.yimixican.db.ConnectionManager;
@@ -24,12 +23,11 @@ public class UsersDaoImpl implements IUsersDao {
 	@Override
 	public int insert(Users user) {
 		// TODO Auto-generated method stub
-Connection conn=connectionManager.openConnection();
-	    
+		Connection conn=connectionManager.openConnection();
 	    TransactionManager.conn=conn;
 	    TransactionManager.beginTransaction();
 	    
-	    String uid=user.getUid();
+	   // String uid=user.getUid();
 	    String username=user.getUsername();
 	    String password=user.getPassword();
 	    String repassword=user.getRepassword();
@@ -40,10 +38,9 @@ Connection conn=connectionManager.openConnection();
 	    float weight=user.getWeight();
 	    String remindtime=user.getRemindtime();
 	    String declaration=user.getDeclaration();
-	    
-	    String strSQL="insert into Users values(null,?,?,?,?,?,?,?,?,?,?)";
-	    
-	    Object[] params=new Object[]{uid,username,password,repassword,gender,age,remind,height,weight,declaration,remindtime};
+	    String regtime=user.getRegtime();
+	    String strSQL="insert into Users values(null,?,?,?,?,?,?,?,?,?,?,?)";
+	    Object[] params=new Object[]{username,regtime,gender,age,remind,password,height,weight,declaration,remindtime,repassword};
 	    
 	    int affectedRows=this.dbUtils.execOthers(conn, strSQL, params);
 	    
@@ -75,7 +72,7 @@ Connection conn=connectionManager.openConnection();
 				while(resultSet.next())
 				{
 					Users user=new Users();
-					user.setUid(resultSet.getString(1));
+					user.setUid(resultSet.getInt(1));
 					user.setUsername(resultSet.getString(2));
 					user.setPassword(resultSet.getString(3));
 					user.setGender(resultSet.getInt(4));
@@ -112,9 +109,40 @@ Connection conn=connectionManager.openConnection();
 
 	@Override
 	public Users selectByName(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn=connectionManager.openConnection();
+		String strSQL = "select * from users where username=?";
+		Object[] params = new Object[] { username};
+		
+		ResultSet resultSet = this.dbUtils.execQuery(conn, strSQL, params);
+	
+		try {
+			if (resultSet.next()) {
+				Users user=new Users();
+				user.setUid(resultSet.getInt(1));
+				user.setUsername(resultSet.getString(2));
+				user.setPassword(resultSet.getString(3));
+				user.setGender(resultSet.getInt(4));
+				user.setAge(resultSet.getInt(5));
+				user.setRank(resultSet.getInt(6));
+				user.setRemind(resultSet.getString(7));
+				user.setHeight(resultSet.getFloat(8));
+				user.setWeight(resultSet.getFloat(9));
+				user.setDeclaration(resultSet.getString(10));
+				user.setRemindtime(resultSet.getString(11));
+				user.setRepassword(resultSet.getString(12));
+				return user;
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} finally {
+			this.connectionManager.closeConnection(conn);
+		}
 	}
+
 
 	@Override
 	public int update(Users user) {
@@ -123,7 +151,7 @@ Connection conn=connectionManager.openConnection();
 	}
 
 	@Override
-	public Users selectByObject(String uid, String password) {
+	public Users selectByObject(int uid, String password) {
 		// TODO Auto-generated method stub
 Connection conn = this.connectionManager.openConnection();
 		
@@ -134,7 +162,7 @@ Connection conn = this.connectionManager.openConnection();
 		try {
 			if(resultSet.next()){
 				Users user=new Users();
-				user.setUid(resultSet.getString(1));
+				user.setUid(resultSet.getInt(1));
 				user.setUsername(resultSet.getString(2));
 				user.setPassword(resultSet.getString(3));
 				user.setGender(resultSet.getInt(4));
@@ -159,7 +187,7 @@ Connection conn = this.connectionManager.openConnection();
 	}
 
 	@Override
-	public Users selectById(String uid) {
+	public Users selectById(int uid) {
 		// TODO Auto-generated method stub
 Connection conn = this.connectionManager.openConnection();
 		
@@ -171,7 +199,7 @@ Connection conn = this.connectionManager.openConnection();
 		try {
 			if (resultSet.next()) {
 				Users user=new Users();
-				user.setUid(resultSet.getString(1));
+				user.setUid(resultSet.getInt(1));
 				user.setUsername(resultSet.getString(2));
 				user.setPassword(resultSet.getString(3));
 				user.setGender(resultSet.getInt(4));
@@ -194,6 +222,16 @@ Connection conn = this.connectionManager.openConnection();
 		} finally {
 			this.connectionManager.closeConnection(conn);
 		}
+	}
+	@Override
+	public boolean isHave(String account) {
+		// TODO Auto-generated method stub
+		Users user=new Users();
+		user=selectByName(account);
+		if(user==null){
+		return false;}
+		else{
+			return true;}
 	}
 
 }

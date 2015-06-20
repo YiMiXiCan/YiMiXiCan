@@ -20,7 +20,7 @@ private IUsersDao iUsersDao;
 	@Override
 	public boolean add(Users user) {
 		// TODO Auto-generated method stub
-		if(this.iUsersDao.selectById(user.getUid())==null){
+		if(this.iUsersDao.selectByName(user.getUsername())==null){
 			if(user.getUsername()!=null&&user.getPassword()!=null&&user.getRepassword()!=null)
 			{
 			
@@ -44,9 +44,21 @@ private IUsersDao iUsersDao;
 	}
 
 	@Override
-	public Users findById(String uid) {
+	public Users findById(int uid) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isHave(String account) {
+		// TODO Auto-generated method stub
+		return iUsersDao.isHave(account);
+	}
+
+	@Override
+	public Users selectByName(String username) {
+		// TODO Auto-generated method stub
+		return iUsersDao.selectByName(username);
 	}
 
 }
