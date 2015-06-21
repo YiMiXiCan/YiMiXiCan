@@ -9,8 +9,7 @@ public class DailyCard {
 	private int dailyID;
 	private int userID;
 	private int habitID;
-	private String finishTime;
-	
+	private String finishTime;	
 	private String habitName;
 
 	public DailyCard() {

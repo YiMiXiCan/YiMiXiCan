@@ -46,7 +46,7 @@ private IUsersDao iUsersDao;
 	@Override
 	public Users findById(int uid) {
 		// TODO Auto-generated method stub
-		return null;
+		return iUsersDao.selectById(uid);
 	}
 
 	@Override

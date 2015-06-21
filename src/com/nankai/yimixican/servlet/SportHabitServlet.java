@@ -2,33 +2,29 @@ package com.nankai.yimixican.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.nankai.yimixican.biz.ILoginBiz;
-import com.nankai.yimixican.biz.IUsersBiz;
-import com.nankai.yimixican.biz.impl.UsersBizImpl;
-import com.nankai.yimixican.po.Users;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.nankai.yimixican.biz.IHabitBiz;
+import com.nankai.yimixican.biz.impl.HabitBizImpl;
+import com.nankai.yimixican.po.Habit;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class SportHabitServlet
  */
-public class LoginServlet extends HttpServlet {
+public class SportHabitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public SportHabitServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,28 +42,23 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-	request.setCharacterEncoding("UTF-8");
-		//--------------------接受数据JSon-----------------
-		// 获取终端传入的JSon数据
-		String user_data = request.getParameter("user_data");
-		// 反序列化形成一个Users对象
+		IHabitBiz habitBiz = new HabitBizImpl();
+		List<Habit> lstMessages = habitBiz.showHabitsByClassID(3);
+		
+		// 步骤1：创建Gson对象
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd hh:mm:ss").create();
-		Users user= gson.fromJson(user_data, Users.class);
+		String gson_data = gson.toJson(lstMessages);
 		
-		// -------------------处理数据-----------------------
-		IUsersBiz userBiz=new UsersBizImpl();		
-		Users loginUser = userBiz.selectByName(user.getUsername());	
-		
-		// -------------------响应客户端 JSon----------------
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();		
-		String gson_data = gson.toJson(loginUser);
 		
-		System.out.println(gson_data);
-		out.println(gson_data);
+		
+		PrintWriter out = response.getWriter();
+		
+		out.print(gson_data);
 		
 		out.flush();
 		out.close();
 	}
+
 }
